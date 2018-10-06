@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour
 
     [HideInInspector]
 	public Color InterfaceColour;
-	public string PageName;
+	public Page CurrentPage { get; private set; }
+	public Page PreviousPage { get; private set; }
 	public Image[] InterfaceElements;
 
     [SerializeField]
@@ -27,17 +28,34 @@ public class GameController : MonoBehaviour
 	void Start ()
 	{
 		InterfaceColour = new Color(0.27f, 0.72f, 1.0f);
-		PageName = "Summary";
+		CurrentPage = Page.Summary;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		foreach (Image i in InterfaceElements)
+        switch (CurrentPage)
 		{
-			i.color = InterfaceColour;
+			case Page.Summary:
+                InterfaceColour = new Color(0.27f, 0.72f, 1.0f);
+			    break;
+
+			case Page.Hamburger:
+                InterfaceColour = new Color(0.5f, 0.5f, 0.5f);
+			    break;
 		}
 
-		Heading.text = PageName;
+		foreach (Image i in InterfaceElements)
+		{
+			i.color = Color.Lerp(i.color, InterfaceColour, 0.1f);
+		}
+
+		Heading.text = CurrentPage.ToString();
+	}
+
+	public void ChangePage (Page newPage)
+	{
+		PreviousPage = CurrentPage;
+        CurrentPage = newPage;
 	}
 }
