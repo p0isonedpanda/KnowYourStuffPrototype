@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Summary
+  - Rooms
+  - Items
+  - Receipts
+  - Settings
   layers:
   - Default
   - TransparentFX

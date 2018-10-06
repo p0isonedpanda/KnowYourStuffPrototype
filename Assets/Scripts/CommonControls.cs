@@ -47,6 +47,7 @@ public class CommonControls : MonoBehaviour
 		);
 	}
 
+    // This should only be called to toggle on or off the menu
 	public void HamburgerMenu ()
 	{
 		if (Current == Inactive)
@@ -59,5 +60,11 @@ public class CommonControls : MonoBehaviour
 			Current = Inactive;
 			gc.ChangePage(gc.PreviousPage);
 		}
+	}
+
+    // Use this to close the menu from an external script
+	public void CloseHamburgerMenu ()
+	{
+		Current = Inactive;
 	}
 }

@@ -3,7 +3,7 @@
 	Summary,
     Rooms,
     Items,
-    Reciepts,
+    Receipts,
     Settings,
     Hamburger
 }
