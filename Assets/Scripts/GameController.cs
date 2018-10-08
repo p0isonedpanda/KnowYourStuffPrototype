@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 
 	public static GameController instance { get; private set; }
 
+	private GameObject welcomeScreen;
+
     [HideInInspector]
 	public Color InterfaceColour;
 	public Page CurrentPage { get; private set; }
@@ -29,9 +31,6 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		InterfaceColour = new Color(0.27f, 0.72f, 1.0f);
-		CurrentPage = Page.Summary;
-
 		// Store pages in dictionary
 		Pages = new Dictionary<string, GameObject>();
 		Pages.Add("Summary", GameObject.FindWithTag("Summary"));
@@ -39,11 +38,30 @@ public class GameController : MonoBehaviour
         Pages.Add("Items", GameObject.FindWithTag("Items"));
 		Pages.Add("Receipts", GameObject.FindWithTag("Receipts"));
 		Pages.Add("Settings", GameObject.FindWithTag("Settings"));
+
+		InterfaceColour = new Color(0.27f, 0.72f, 1.0f);
+		CurrentPage = Page.Summary;
+
+		ChangePage(CurrentPage);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+        // Make sure that the interface elements are the same uniform colour
+		foreach (Image i in InterfaceElements)
+		{
+			i.color = Color.Lerp(i.color, InterfaceColour, 0.1f);
+		}
+
+	}
+
+    // Use this to change the current page through an external script
+	public void ChangePage (Page newPage)
+	{
+		PreviousPage = CurrentPage;
+        CurrentPage = newPage;
+
 		// Display the correct page
 		if (CurrentPage != Page.Hamburger)
 		{
@@ -82,19 +100,5 @@ public class GameController : MonoBehaviour
                 InterfaceColour = new Color(0.5f, 0.5f, 0.5f);
 			    break;
 		}
-
-        // Make sure that the interface elements are the same uniform colour
-		foreach (Image i in InterfaceElements)
-		{
-			i.color = Color.Lerp(i.color, InterfaceColour, 0.1f);
-		}
-
-	}
-
-    // Use this to change the current page through an external script
-	public void ChangePage (Page newPage)
-	{
-		PreviousPage = CurrentPage;
-        CurrentPage = newPage;
 	}
 }
