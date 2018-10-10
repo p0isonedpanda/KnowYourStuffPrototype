@@ -19,5 +19,10 @@ public class SoftButtons : MonoBehaviour
 		{
 			cc.HamburgerMenu(); // This will deactivate the hamburger menu
 		}
+
+		if (gc.CurrentPage == Page.AddItem || gc.CurrentPage == Page.AddRoom)
+		{
+			gc.ChangePage(gc.PreviousPage);
+		}
 	}
 }

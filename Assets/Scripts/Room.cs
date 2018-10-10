@@ -5,7 +5,15 @@ using UnityEngine;
 public class Room : BaseObject
 {
 	public RoomType Type;
-	public List<Item> Items;
+	private List<Item> items;
+	public List<Item> Items
+	{
+		get
+		{
+			return items;
+		}
+	}
+
 	public float Value
 	{
         get
@@ -24,6 +32,11 @@ public class Room : BaseObject
 	public Room (string _name, string _notes, RoomType _type) : base (_name, _notes)
 	{
 		Type = _type;
-		Items = new List<Item>();
+		items = new List<Item>();
+	}
+
+	public void AddItem (Item itm)
+	{
+		items.Add(itm);
 	}
 }

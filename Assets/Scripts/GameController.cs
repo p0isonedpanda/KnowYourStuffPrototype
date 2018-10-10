@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
 
 	public static GameController instance { get; private set; }
+	private AddItem ai;
 
 	private GameObject welcomeScreen;
 
@@ -18,8 +19,52 @@ public class GameController : MonoBehaviour
 
 	private Dictionary<string, GameObject> Pages;
 
+    [HideInInspector]
+	public List<Room> Rooms;
+
     [SerializeField]
 	private Text Heading;
+
+	public float TotalValue
+	{
+		get
+		{
+			float output = 0.0f;
+
+			foreach (Room r in Rooms)
+			{
+				foreach (Item i in r.Items)
+				{
+					output += i.Value;
+				}
+			}
+
+			return output;
+		}
+	}
+
+	public float RoomCount
+	{
+		get
+		{
+			return Rooms.Count;
+		}
+	}
+
+	public float ItemCount
+	{
+		get
+		{
+			int output = 0;
+			
+			foreach (Room r in Rooms)
+			{
+				output += r.Items.Count;
+			}
+
+			return output;
+		}
+	}
 
     // Used for initialising the singleton
 	void Awake ()
@@ -31,11 +76,15 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        ai = AddItem.instance;
+
 		// Store pages in dictionary
 		Pages = new Dictionary<string, GameObject>();
 		Pages.Add("Summary", GameObject.FindWithTag("Summary"));
 		Pages.Add("Rooms", GameObject.FindWithTag("Rooms"));
+		Pages.Add("AddRoom", GameObject.FindWithTag("AddRoom"));
         Pages.Add("Items", GameObject.FindWithTag("Items"));
+		Pages.Add("AddItem", GameObject.FindWithTag("AddItem"));
 		Pages.Add("Receipts", GameObject.FindWithTag("Receipts"));
 		Pages.Add("Settings", GameObject.FindWithTag("Settings"));
 
@@ -43,6 +92,17 @@ public class GameController : MonoBehaviour
 		CurrentPage = Page.Summary;
 
 		ChangePage(CurrentPage);
+
+		// Make some dummy data for the start
+		Room temp = new Room("Living room", "", RoomType.LivingSpace);
+		temp.AddItem(new Item("Table", 75.0f, "Living room", ItemCategory.Furniture, ""));
+		Rooms.Add(temp);
+
+		temp = new Room("Kitchen", "", RoomType.Kitchen);
+		temp.AddItem(new Item("Spaghetti", 13.5f, "Kitchen", ItemCategory.Spaghetti, ""));
+		Rooms.Add(temp);
+
+		ai.UpdateRooms();
 	}
 	
 	// Update is called once per frame
@@ -81,11 +141,15 @@ public class GameController : MonoBehaviour
 			    break;
 
 			case Page.Rooms:
+			case Page.AddRoom:
 			    InterfaceColour = new Color(0.74f, 0.0f, 1.0f);
+				Heading.text = "Rooms";
 				break;
 
 			case Page.Items:
+			case Page.AddItem:
 			    InterfaceColour = new Color(1.0f, 0.14f, 0.34f);
+				Heading.text = "Items";
 				break;
 
 			case Page.Receipts:

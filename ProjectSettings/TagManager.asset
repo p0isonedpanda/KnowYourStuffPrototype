@@ -9,6 +9,8 @@ TagManager:
   - Items
   - Receipts
   - Settings
+  - AddItem
+  - AddRoom
   layers:
   - Default
   - TransparentFX
