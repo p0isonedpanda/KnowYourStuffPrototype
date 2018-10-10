@@ -8,7 +8,7 @@ public class Item : BaseObject
 	public string Room;
 	public ItemCategory Category;
 
-	public Item (string _name, float _value, string _room, ItemCategory _category, string _notes) : base (_name, _notes)
+	public Item (string _objName, float _value, string _room, ItemCategory _category, string _notes) : base (_objName, _notes)
 	{
         Value = _value;
 		Room = _room;

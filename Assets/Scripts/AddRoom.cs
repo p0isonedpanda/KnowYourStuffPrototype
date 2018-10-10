@@ -9,7 +9,7 @@ public class AddRoom : MonoBehaviour
 	private AddItem ai;
 
 	[SerializeField]
-	private InputField name, notes;
+	private InputField namefield, notes;
 	[SerializeField]
 	private Dropdown category;
 
@@ -21,13 +21,13 @@ public class AddRoom : MonoBehaviour
 
 	public void Save ()
 	{
-		gc.Rooms.Add(new Room(name.text, notes.text, (RoomType)category.value - 1));
+		gc.Rooms.Add(namefield.text, new Room(namefield.text, notes.text, (RoomType)category.value - 1));
 		gc.ChangePage(Page.Rooms);
 	}
 
 	public void ResetFields ()
 	{
-		name.text = "";
+		namefield.text = "";
 		notes.text = "";
 
 		category.value = 0;

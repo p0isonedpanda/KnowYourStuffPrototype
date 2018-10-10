@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseObject : MonoBehaviour
+public abstract class BaseObject
 {
-	public string Name;
+	public string ObjName;
 	public string Notes;
 	public List<Sprite> Images;
 
-	public BaseObject (string _name, string _notes)
+	public BaseObject (string _objName, string _notes)
 	{
-		Name = _name;
+		ObjName = _objName;
 		Notes = _notes;
 		Images = new List<Sprite>();
 	}

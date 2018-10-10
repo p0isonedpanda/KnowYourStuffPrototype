@@ -4890,7 +4890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fb2aa4883aa4f6bbc26abbda2326fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 349169567}
+  namefield: {fileID: 0}
   value: {fileID: 1740073896}
   notes: {fileID: 537029861}
   room: {fileID: 220691237}
@@ -5188,9 +5188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcae8ba9375ec40c4b1a7924c0119c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 0}
-  notes: {fileID: 0}
-  category: {fileID: 0}
+  namefield: {fileID: 378622201}
+  notes: {fileID: 1220035745}
+  category: {fileID: 1744911172}
 --- !u!1 &943403981
 GameObject:
   m_ObjectHideFlags: 0

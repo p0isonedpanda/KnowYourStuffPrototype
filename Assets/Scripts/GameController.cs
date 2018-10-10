@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 	private Dictionary<string, GameObject> Pages;
 
     [HideInInspector]
-	public List<Room> Rooms;
+	public Dictionary<string, Room> Rooms;
 
     [SerializeField]
 	private Text Heading;
@@ -31,9 +31,9 @@ public class GameController : MonoBehaviour
 		{
 			float output = 0.0f;
 
-			foreach (Room r in Rooms)
+			foreach (KeyValuePair<string, Room> r in Rooms)
 			{
-				foreach (Item i in r.Items)
+				foreach (Item i in r.Value.Items)
 				{
 					output += i.Value;
 				}
@@ -57,9 +57,9 @@ public class GameController : MonoBehaviour
 		{
 			int output = 0;
 			
-			foreach (Room r in Rooms)
+			foreach (KeyValuePair<string, Room> r in Rooms)
 			{
-				output += r.Items.Count;
+				output += r.Value.Items.Count;
 			}
 
 			return output;
@@ -94,15 +94,14 @@ public class GameController : MonoBehaviour
 		ChangePage(CurrentPage);
 
 		// Make some dummy data for the start
+		Rooms = new Dictionary<string, Room>();
 		Room temp = new Room("Living room", "", RoomType.LivingSpace);
 		temp.AddItem(new Item("Table", 75.0f, "Living room", ItemCategory.Furniture, ""));
-		Rooms.Add(temp);
+		Rooms.Add(temp.ObjName, temp);
 
 		temp = new Room("Kitchen", "", RoomType.Kitchen);
 		temp.AddItem(new Item("Spaghetti", 13.5f, "Kitchen", ItemCategory.Spaghetti, ""));
-		Rooms.Add(temp);
-
-		ai.UpdateRooms();
+		Rooms.Add(temp.ObjName, temp);
 	}
 	
 	// Update is called once per frame
@@ -150,6 +149,7 @@ public class GameController : MonoBehaviour
 			case Page.AddItem:
 			    InterfaceColour = new Color(1.0f, 0.14f, 0.34f);
 				Heading.text = "Items";
+				ai.UpdateRooms();
 				break;
 
 			case Page.Receipts:

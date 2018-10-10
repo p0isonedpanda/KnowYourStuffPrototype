@@ -10,7 +10,7 @@ public class AddItem : MonoBehaviour
 	private GameController gc;
 
     [SerializeField]
-	private InputField name, value, notes;
+	private InputField namefield, value, notes;
 	[SerializeField]
 	private Dropdown room, category;
 
@@ -29,6 +29,7 @@ public class AddItem : MonoBehaviour
 	{
 		if (Validate())
 		{
+		    gc.Rooms[room.options[room.value].text].AddItem(new Item(namefield.text, float.Parse(value.text), room.options[room.value].text, (ItemCategory)category.value - 1, notes.text));
 			ResetFields();
 		    gc.ChangePage(Page.Items);
 		}
@@ -54,7 +55,7 @@ public class AddItem : MonoBehaviour
 
 	private void ResetFields ()
 	{
-		name.text = "";
+		namefield.text = "";
 		value.text = "";
 		notes.text = "";
 
@@ -64,19 +65,15 @@ public class AddItem : MonoBehaviour
 
 	public void UpdateRooms()
 	{
-		Debug.Log("Clearing options");
 		room.ClearOptions();
 		List<string> options = new List<string>();
 
         options.Add("Please Select");
-        Debug.Log("Making options");
-		foreach (Room r in gc.Rooms)
+		foreach (KeyValuePair<string, Room> r in gc.Rooms)
 		{
-			Debug.Log("Adding room: " + r.name);
-			options.Add(r.name);
+			options.Add(r.Value.ObjName);
 		}
 
-        Debug.Log("Adding options");
 		room.AddOptions(options);
 	}
 }
