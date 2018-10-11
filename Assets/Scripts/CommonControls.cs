@@ -32,19 +32,39 @@ public class CommonControls : MonoBehaviour
 	{
 		SlideOutMenu.localPosition = Vector3.Lerp(SlideOutMenu.localPosition, Current.localPosition, 0.1f);
 
-		GetComponent<RectTransform>().localPosition = new Vector3
-		(
-			Mathf.Lerp(GetComponent<RectTransform>().localPosition.x, Current.localPosition.x + 935.4f, 0.1f),
-			GetComponent<RectTransform>().localPosition.y,
-			GetComponent<RectTransform>().localPosition.z
-		);
 
-		Pages.localPosition = new Vector3
-		(
-			Mathf.Lerp(Pages.localPosition.x, Current.localPosition.x + 935.4f, 0.1f),
-			Pages.localPosition.y,
-			Pages.localPosition.z
-		);
+        if (Current == Active)
+		{
+			GetComponent<RectTransform>().localPosition = new Vector3
+		    (
+		    	Mathf.Lerp(GetComponent<RectTransform>().localPosition.x, Current.localPosition.x + 635.4f, 0.1f),
+		    	GetComponent<RectTransform>().localPosition.y,
+		    	GetComponent<RectTransform>().localPosition.z
+		    );
+
+		    Pages.localPosition = new Vector3
+		    (
+		    	Mathf.Lerp(Pages.localPosition.x, Current.localPosition.x + 635.4f, 0.1f),
+		    	Pages.localPosition.y,
+		    	Pages.localPosition.z
+		    );
+		}
+		else
+		{
+		    GetComponent<RectTransform>().localPosition = new Vector3
+		    (
+		    	Mathf.Lerp(GetComponent<RectTransform>().localPosition.x, Current.localPosition.x + 935.4f, 0.1f),
+		    	GetComponent<RectTransform>().localPosition.y,
+		    	GetComponent<RectTransform>().localPosition.z
+		    );
+
+		    Pages.localPosition = new Vector3
+		    (
+		    	Mathf.Lerp(Pages.localPosition.x, Current.localPosition.x + 935.4f, 0.1f),
+		    	Pages.localPosition.y,
+		    	Pages.localPosition.z
+		    );
+		}
 	}
 
     // This should only be called to toggle on or off the menu

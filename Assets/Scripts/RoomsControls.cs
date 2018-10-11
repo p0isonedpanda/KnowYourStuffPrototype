@@ -39,7 +39,6 @@ public class RoomsControls : MonoBehaviour
 
 		RoomDisplay = new List<GameObject>();
 
-        int index = 0;
 		int currentPos = 0;
 
 		foreach (KeyValuePair<string, Room> r in gc.Rooms)
@@ -50,8 +49,7 @@ public class RoomsControls : MonoBehaviour
 			temp.transform.SetParent(displayStart);
 			RoomDisplay.Add(temp);
 
-            currentPos += 90;
-			index++;
+            currentPos += 120;
 		}
 	}
 }

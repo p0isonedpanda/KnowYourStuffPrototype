@@ -9,12 +9,33 @@ public class ItemDisplay : MonoBehaviour
 
 	[SerializeField]
 	private Text label, value, room, category;
+	private GameController gc;
+	private ItemsControls ic;
 
-	void Start ()
+	void Start()
+	{
+		gc = GameController.instance;
+		ic = ItemsControls.instance;
+	}
+
+	public void UpdateDisplay ()
 	{
 		label.text = Display.ObjName;
         value.text = "$" + Display.Value.ToString();
 		room.text = Display.Room;
 		category.text = Display.Category.ToString();
+	}
+
+	public void Delete ()
+	{
+		foreach (KeyValuePair<string, Room> r in gc.Rooms)
+		{
+			foreach (Item i in r.Value.Items)
+			{
+				if (i == Display) r.Value.Items.Remove(i);
+			}
+		}
+
+		ic.UpdateDisplay();
 	}
 }
