@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 
 	public static GameController instance { get; private set; }
 	private AddItem ai;
+	private RoomsControls rc;
 
 	private GameObject welcomeScreen;
 
@@ -77,6 +78,7 @@ public class GameController : MonoBehaviour
 	void Start ()
 	{
         ai = AddItem.instance;
+		rc = RoomsControls.instance;
 
 		// Store pages in dictionary
 		Pages = new Dictionary<string, GameObject>();
@@ -143,6 +145,7 @@ public class GameController : MonoBehaviour
 			case Page.AddRoom:
 			    InterfaceColour = new Color(0.74f, 0.0f, 1.0f);
 				Heading.text = "Rooms";
+				rc.UpdateDisplay();
 				break;
 
 			case Page.Items:
