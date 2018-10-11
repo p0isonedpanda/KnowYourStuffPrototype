@@ -33,6 +33,7 @@ public class ItemDisplay : MonoBehaviour
 			foreach (Item i in r.Value.Items)
 			{
 				if (i == Display) r.Value.Items.Remove(i);
+				break;
 			}
 		}
 
